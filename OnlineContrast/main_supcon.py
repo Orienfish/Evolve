@@ -116,7 +116,7 @@ def parse_option():
 
     # method
     parser.add_argument('--criterion', type=str, default='supcon',
-                        choices=['supcon', 'simclr', 'scale', 'cka',
+                        choices=['supcon', 'simclr', 'scale', 'evolve',
                                  'barlowtwins', 'byol', 'vicreg', 'simsiam'],
                         help='major criterion')
     parser.add_argument('--lifelong_method', type=str, default='none',
@@ -275,7 +275,7 @@ def train_step(images, labels, models, criterions, optimizer,
             loss_contrast = criterion(model, model, feed_images_0, feed_images_1,
                              labels=feed_labels)
 
-        elif opt.criterion in ['simclr', 'cka', 'barlowtwins', 'byol', 'vicreg', 'simsiam']:
+        elif opt.criterion in ['simclr', 'evolve', 'barlowtwins', 'byol', 'vicreg', 'simsiam']:
             loss_contrast = criterion(model, model, feed_images_0, feed_images_1)
 
         # print(loss_contrast)

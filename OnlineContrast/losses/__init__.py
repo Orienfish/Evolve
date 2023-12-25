@@ -16,7 +16,7 @@ def get_loss(opt):
         criterion = SupConLoss(stream_bsz=opt.batch_size,
                                model=opt.model,
                                temperature=opt.temp_cont)
-    elif opt.criterion == 'cka':
+    elif opt.criterion == 'evolve':
         criterion = CKALoss()
     elif opt.criterion == 'barlowtwins':
         criterion = BarlowTwinsLoss(model=opt.model,
