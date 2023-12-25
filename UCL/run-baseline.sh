@@ -1,8 +1,8 @@
 # Usage:
 #   Run UCL on various dataset under four streaming settings: iid, seq, seq-bl, seq-cc, e.g.,
-#     ./run-baseline.sh mixup supcon mnist iid trial#
+#     ./run-baseline.sh mixup byol mnist iid trial#
 #   Method choices: mixup, pnn, si, der
-#   Model name choices: supcon, simsiam, barlowtwins
+#   Model name choices: simclr, simsiam, barlowtwins, byol, vicreg
 #   Dataset choices: mnist, svhn, cifar10, cifar100, tinyimagenet
 #   Datatype choices: iid, seq, seq-bl, seq-cc, seq-im
 #   Trial #: the number of trial

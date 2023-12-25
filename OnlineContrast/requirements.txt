@@ -8,8 +8,10 @@ attrs==21.4.0
 Babel==2.9.1
 backcall==0.2.0
 backports.entry-points-selectable==1.1.0
+beautifulsoup4==4.12.2
 black==21.12b0
 bleach==4.1.0
+blessed==1.20.0
 cachetools==4.2.4
 certifi==2021.5.30
 cffi==1.15.0
@@ -30,6 +32,7 @@ filelock==3.0.12
 flatbuffers==1.12
 fonttools==4.28.5
 gast==0.4.0
+gdown==4.7.1
 google-auth==1.35.0
 google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
@@ -89,6 +92,7 @@ nvidia-cufft-cu11==10.9.0.58
 nvidia-curand-cu11==10.2.10.91
 nvidia-cusolver-cu11==11.4.0.1
 nvidia-cusparse-cu11==11.7.4.91
+nvidia-ml-py==12.535.133
 nvidia-nccl-cu11==2.14.3
 nvidia-nvtx-cu11==11.7.91
 oauthlib==3.1.1
@@ -116,9 +120,11 @@ pycparser==2.21
 Pygments==2.11.2
 pyparsing==2.4.7
 pyrsistent==0.18.0
+PySocks==1.7.1
 python-dateutil==2.8.2
 pytz==2021.1
 PyWavelets==1.1.1
+PyYAML==6.0.1
 pyzmq==22.3.0
 qtconsole==5.2.2
 QtPy==2.0.1
@@ -135,6 +141,7 @@ sets==0.3.2
 six==1.15.0
 sklearn==0.0
 sniffio==1.2.0
+soupsieve==2.5
 stack-data==0.1.3
 stevedore==3.4.0
 sympy==1.11.1

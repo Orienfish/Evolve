@@ -5,7 +5,6 @@ from sklearn.metrics import silhouette_score
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 from eval_utils import *
-import diversipy
 
 
 def reservoir(num_seen_examples: int, buffer_size: int) -> int:
@@ -252,50 +251,6 @@ class Memory(object):
                 select_indices += list(np.arange(all_images.shape[0])[lb_ind][select_ind])
 
             select_indices = np.array(sorted(select_indices))
-
-        elif self.cluster_type in ['max_coverage', 'psa', 'maximin', 'energy']:
-            # Clustering
-            simil_matrix = tsne_simil(all_embeddings, metric='cosine')
-
-            # Init selected indices as all indices
-            select_indices = np.arange(all_embeddings.shape[0])
-
-            if all_embeddings.shape[0] > self.max_size:  # needs subset selection
-                if self.cluster_type == 'max_coverage':
-                    # simil_min = np.min(simil_matrix)
-                    simil_max = np.max(simil_matrix)
-                    simil_mean = np.mean(simil_matrix)
-                    simil_threshold = simil_mean + 0.2 * (simil_max - simil_mean)
-                    simil_mask = np.zeros_like(simil_matrix)
-                    simil_mask[simil_matrix > simil_threshold] = 1
-                    print('avg masks: {} all images: {}'.format(
-                        np.sum(simil_mask) / simil_mask.shape[0], simil_mask.shape[0]
-                    ))
-
-                    sorted_idx = np.argsort(simil_mask.sum(axis=1))
-                    select_indices = sorted_idx[:self.max_size]
-
-                elif self.cluster_type == 'psa':
-                    select_indices = diversipy.subset.psa_select(all_embeddings, self.max_size)
-                    select_indices.sort()
-                    print('select {} from {}'.format(self.max_size, all_embeddings.shape[0]))
-
-                elif self.cluster_type == 'maximin':
-                    # As in the MinRed paper, use cosine similarity after normed
-                    select_indices = diversipy.subset.select_greedy_maximin(
-                        all_embeddings, self.max_size, dist_args={'dist': 'cosine'}
-                    )
-                    select_indices.sort()
-                    print('select {} from {}'.format(self.max_size, all_embeddings.shape[0]))
-
-                else:  # self.cluster_type == 'energy':
-                    select_indices = diversipy.subset.select_greedy_energy(all_embeddings, self.max_size)
-                    select_indices.sort()
-                    print('select {} from {}'.format(self.max_size, all_embeddings.shape[0]))
-
-            self.images = [all_images[select_indices]]
-            self.true_labels = [all_true_labels[select_indices]]
-            self.labels_set = [0]
 
         else:
             raise ValueError(

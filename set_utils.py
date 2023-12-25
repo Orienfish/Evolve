@@ -28,8 +28,8 @@ dataset_num_classes = {
 }
 
 def create_model(model_type: str,
-                 method: str,
-                 dataset: str,
+                 method: str='',
+                 dataset: str='',
                  **kwargs):
     if model_type == 'resnet18':
         if method == 'pnn':

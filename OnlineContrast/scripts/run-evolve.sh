@@ -1,7 +1,7 @@
 # Usage:
 #   Run Evolve on ALL dataset under FIVE streaming settings: iid, seq, seq-bl, seq-cc, seq-im, e.g.,
 #     ./run-evolve.sh simclr mnist iid trial#
-#   Criterion choices: simclr, scale, cka, supcon, barlowtwins
+#   Criterion choices: simclr, byol, barlowtwins, simsiam, vicreg, cka
 #   Dataset choices: mnist, svhn, cifar10, cifar100, tinyimagenet
 #   Data stream choices: iid, seq, seq-bl, seq-cc, seq-im
 #   Trial #: the number of trial

@@ -6,6 +6,8 @@ Xiaofan Yu, Tajana Rosing, Yunhui Guo. "EVOLVE: Enhancing Unsupervised Continual
 
 ## File Structure
 
+We emulate the hybrid mode of cloud and edge device in one environment.
+
 * `OnlineContrast` holds the implementation of our method Evolve and CaSSLe. The code is implemented based on [SupContrast](https://github.com/HobbitLong/SupContrast).
 * `UCL` holds the implementation of LUMP, PNN, SI, DER adapted from the original repo [UCL](https://github.com/divyam3897/UCL).
 
@@ -13,13 +15,13 @@ Dataset configuration for `OnlineContrast` and `UCL` is in `data_utils.py`. Mode
 
 ## Prerequisites
 
-In each folder, set up the environment with `pip3 install -r requirements.txt`. We test `OnlineContrast` and `UCL` with Python3.8. Our machine uses CUDA 11.7 and a NVIDIA RTX 3080 Ti GPU.
+In each folder, set up the environment with `pip3 install -r requirements.txt`.
 
 To use the pretrained models as teacher models, please download the zip file `pretrained_models.zip` from [here](https://drive.google.com/file/d/1dlH_-bBS6SXcQuuKDs03ID5n7tssj5RU/view?usp=sharing) and unzip it in the root directory.
 
 ### Dataset Preparation
 
-We mainly focus on image classification while the methodology can be applied to more general scenarios. In this repo, we test with CIFAR-10 (classes), TinyImageNet (10 classes), CoRe50 (50 classes) and Stream-51 (51 classes).
+We mainly focus on image classification while the methodology can be applied to more general scenarios. In this repo, we test with CIFAR-10 (10 classes), TinyImageNet (100 classes), CoRe50 (50 classes) and Stream-51 (51 classes).
 
 For all methods in `OnlineContrast` and `UCL` folders, the shared root dataset directory is `datasets`. 
 
@@ -40,7 +42,7 @@ cd OnlineContrast/scripts
 bash ./run-evolve.sh evolve <cifar10/tinyimagenet/core50/stream51> <iid/seq/seq-im> <trial#>
 ```
 
-* We test with three types of data streams as discussed in the paper: (1) **iid**, (2) sequential classes (**seq**), and (3) sequential classes with concurrent classes (**seq-cc**). More details about data stream configuration are explained later.
+* We test with three types of data streams as discussed in the paper: (1) **iid**, (2) sequential classes (**seq**), and (3)sequential classes with imbalance lengths (**seq-im**). More details about data stream configuration are explained later.
 * For all implementations, the last argument of `trial#` (e.g., `0,1,2`) determines the random seed configuration. Hence using the same `trial#` produces the same random selection.
 
 You can run `run-cassle.sh` to run the corresponding baseline with similar argument format.
@@ -55,7 +57,7 @@ We run LUMP (`mixup` in argument), PNN, SI and DER as baselines to compare:
 
 ```bash
 cd UCL
-bash ./run-baseline.sh <mixup/pnn/si/der> supcon <cifar10/tinyimagenet/core50/stream51> <iid/seq/seq-im> <trial#>
+bash ./run-baseline.sh <mixup/pnn/si/der> <simclr/byol/simsiam/barlowtwins/vicreg> <cifar10/tinyimagenet/core50/stream51> <iid/seq/seq-im> <trial#>
 ```
 
 ## Data Stream Configuration
